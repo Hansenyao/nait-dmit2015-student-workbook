@@ -1,6 +1,8 @@
 package dmit2015.faces;
 
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
 
 @Named
@@ -21,6 +23,9 @@ public class HelloBean {
     }
 
     public void submit() {
-        userInput = "out of stock";
+        //userInput += " submitted";
+        var message = String.format("Hello, %s!", userInput);
+        var facesMessage = new FacesMessage(getMessage());
+        FacesContext.getCurrentInstance().addMessage(null, facesMessage);
     }
 }
