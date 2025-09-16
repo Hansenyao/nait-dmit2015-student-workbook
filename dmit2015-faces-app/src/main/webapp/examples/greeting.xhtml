@@ -27,7 +27,13 @@
                                          value="Say Hello"
                                          actionListener="#{greetingBeanRequest.onSubmit()}"
                                          update=":messages greeting_form" />
-                        <p:spacer width="10"/>
+                        <p:spacer height="10"/>
+                        <p:commandButton id="generateButton"
+                                         value="Generate name"
+                                         actionListener="#{greetingBeanRequest.onGenerateName()}"
+                                         update="name"
+                                         process="@this"/>
+                        <p:spacer height="10"/>
                         <p:commandButton id="clearButton"
                                          value="Clear"
                                          actionListener="#{greetingBeanRequest.onClear()}"
