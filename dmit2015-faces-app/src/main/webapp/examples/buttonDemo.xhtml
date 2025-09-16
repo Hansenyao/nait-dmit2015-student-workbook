@@ -1,0 +1,33 @@
+<!-- This is a Faces composition page that extends the layout template -->
+<ui:composition
+        template="/WEB-INF/faces-templates/layout.xhtml"
+        xmlns:ui="jakarta.faces.facelets"
+        xmlns:h="jakarta.faces.html"
+        xmlns:f="jakarta.faces.core"
+        xmlns:p="primefaces"
+        xmlns:o="http://omnifaces.org/ui">
+
+    <ui:param name="title" value="buttonDemon"/>
+
+    <!-- Define main content for the page -->
+    <ui:define name="maincontent">
+        <div class="card">
+            <h1 role="heading" aria-level="1">CommandButton Demo</h1>
+            <h:form id="buttonDemon_form" role="form">
+                <p:panel header="Welcome to CommandButton Demo">
+                    <!-- Add page-specific content here, e.g., PrimeFaces components -->
+                    <p:commandButton id="listenerButton"
+                                     value="Listener Only"
+                                     actionListener="#{buttonDemoBeanRequest.handleClick()}"
+                                     update=":messages :growl buttonDemo_form"/>
+                    <p:spacer height="8" />
+                    <p:commandButton id="actionButton"
+                                     value="Action (may navigate)"
+                                     action="#{buttonDemoBeanRequest.submit()}"
+                                     update=":messages :growl buttonDemo_form" />
+                </p:panel>
+            </h:form>
+        </div>
+    </ui:define>
+
+</ui:composition>

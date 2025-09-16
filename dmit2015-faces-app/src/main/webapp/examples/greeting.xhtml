@@ -1,0 +1,42 @@
+<!-- This is a Faces composition page that extends the layout template -->
+<ui:composition
+        template="/WEB-INF/faces-templates/layout.xhtml"
+        xmlns:ui="jakarta.faces.facelets"
+        xmlns:h="jakarta.faces.html"
+        xmlns:f="jakarta.faces.core"
+        xmlns:p="primefaces"
+        xmlns:o="http://omnifaces.org/ui">
+
+    <!-- Page metadata for title, description, and keywords -->
+    <ui:param name="title" value="greeting"/>
+
+    <!-- Define main content for the page -->
+    <ui:define name="maincontent">
+        <div class="card">
+            <h1 role="heading" aria-level="1">Faces Greeting</h1>
+            <h:form id="greeting_form" role="form">
+                <p:panel header="Welcome to Faces Greeting">
+                    <div class="ui-fluid">
+                        <div class="field">
+                            <p:outputLabel for="name">Name</p:outputLabel>
+                            <p:inputText id="name"
+                                         value="#{greetingBeanRequest.name}"
+                                         placeholder="type your name..." />
+                        </div>
+                        <p:commandButton id="submitButton"
+                                         value="Say Hello"
+                                         actionListener="#{greetingBeanRequest.onSubmit()}"
+                                         update=":messages greeting_form" />
+                        <p:spacer width="10"/>
+                        <p:commandButton id="clearButton"
+                                         value="Clear"
+                                         actionListener="#{greetingBeanRequest.onClear()}"
+                                         update="greeting_form"
+                                         styleClass="ui-button-secondary"/>
+                    </div>
+                </p:panel>
+            </h:form>
+        </div>
+    </ui:define>
+
+</ui:composition>
