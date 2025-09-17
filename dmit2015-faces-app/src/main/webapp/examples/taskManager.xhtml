@@ -30,6 +30,16 @@
                             <p:inputText id="description" value="#{taskManagerSession.currentTask.description}"/>
                         </div>
 
+                        <div class="field">
+                            <p:outputLabel for="@next" value="Priority"/>
+                            <p:selectOneMenu id="priority" value="#{taskManagerSession.currentTask.priority}">
+                                <f:selectItem itemLabel="Select One" itemValue=""/>
+                                <f:selectItem itemLabel="Low" itemValue="Low"/>
+                                <f:selectItem itemLabel="Medium" itemValue="Medium"/>
+                                <f:selectItem itemLabel="High" itemValue="High"/>
+                            </p:selectOneMenu>
+                        </div>
+
                         <!-- Buttons for form submission and clearing -->
                         <div class="formgroup-inline">
                             <div class="field">
@@ -55,12 +65,32 @@
                     <p:dataTable id="dataTable"
                                  value="#{taskManagerSession.tasks}"
                                  var="it"
+                                 rowIndexVar="rowIndex"
                                  reflow="true"
                                  paginator="true" rows="10"
                                  role="grid" aria-label="Data Table">
 
-                        <p:column headerText="Description">
+                        <p:column headerText="Row">
+                            <h:outputText value="#{rowIndex + 1}" />
+                        </p:column>
+
+                        <p:column headerText="Description" filterBy="#{it.description}">
                             <h:outputText value="#{it.description}" />
+                        </p:column>
+
+                        <p:column headerText="Priority">
+                            <p:selectOneMenu value="#{it.priority}">
+                                <f:selectItem itemLabel="Low" itemValue="Low"/>
+                                <f:selectItem itemLabel="Medium" itemValue="Medium"/>
+                                <f:selectItem itemLabel="High" itemValue="High"/>
+                                <p:ajax update="@this :messages"/>
+                            </p:selectOneMenu>
+                        </p:column>
+
+                        <p:column headerText="Done">
+                            <p:selectBooleanCheckbox value="#{it.done}">
+                                <p:ajax update="@this task_tableForm:dataTable :messages"/>
+                            </p:selectBooleanCheckbox>
                         </p:column>
 
                         <p:column headerText="Action">

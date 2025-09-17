@@ -12,4 +12,7 @@ public class Task {
     @NotBlank(message = "Description is required.")
     private String description;
 
+    @NotBlank(message = "Priority is required.")
+    private String priority;    // Low, Medium, High
+    private boolean done;
 }
