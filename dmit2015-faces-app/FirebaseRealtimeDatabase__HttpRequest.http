@@ -11,10 +11,10 @@ Content-Type: application/json
 }
 
 ### Read JSON data by path
-GET https://dmit2015-test-default-rtdb.firebaseio.com//.json
+GET https://dmit2015-test-default-rtdb.firebaseio.com//Task.json
 
 ### Read JSON data by path and primary key value
-@primaryKeyValue = replace-with-actual-value
+@primaryKeyValue = -O_x3NPIb4ZrGTgiAjaf
 GET https://dmit2015-test-default-rtdb.firebaseio.com///{{primaryKeyValue}}.json
 
 ### Write JSON data - will replace all properties with the properties in the request body - if you miss a property it will be removed
@@ -22,12 +22,13 @@ PUT https://dmit2015-test-default-rtdb.firebaseio.com///{{primaryKeyValue}}.json
 Content-Type: application/json
 
 {
-  "propertyName1": "property1Value",
-  "propertyName2": "property2Value",
+  "description": "Reading & Writing assignment 1",
+  "priority": "Medium",
+  "done": false
 }
 
 ### Remove JSON data - use this if you want to delete data
-@deletePrimaryKeyValue = replace-with-actual-value
+@deletePrimaryKeyValue = -O_x3NPIb4ZrGTgiAjaf
 DELETE https://dmit2015-test-default-rtdb.firebaseio.com///{{deletePrimaryKeyValue}}.json
 
 ### Update data - use this if you want to update some of the properties but not all of them
