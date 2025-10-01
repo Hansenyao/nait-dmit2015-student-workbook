@@ -1,0 +1,21 @@
+### Login
+@API_KEY = AIzaSyAAsaVCqyLsChpgHMWCLSDw8Rsd0AjKkRs
+POST https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key={{API_KEY}}
+Content-Type: application/json
+
+{
+  "email": "yyfsingler@163.com",
+  "password": "123456",
+  "returnSecureToke": true
+}
+
+### curl 'https://securetoken.googleapis.com/v1/token?key=[API_KEY]'
+#-H 'Content-Type: application/x-www-form-urlencoded'
+#--data 'grant_type=refresh_token&refresh_token=[REFRESH_TOKEN]'
+@REFRESH_TOKEN = eyJhbGciOiJSUzI1NiIsImtpZCI6ImtJTVNPdyJ9.eyJpc3MiOiJodHRwczovL2lkZW50aXR5dG9vbGtpdC5nb29nbGUuY29tLyIsImF1ZCI6ImRtaXQyMDE1LXRlc3QiLCJpYXQiOjE3NTkzNDg3MTEsImV4cCI6MTc2MDU1ODMxMSwidXNlcl9pZCI6InF3YlU4aHE3ODJZNVRwTzFLZjVYT1hlbTVMczEiLCJlbWFpbCI6Inl5ZnNpbmdsZXJAMTYzLmNvbSIsInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCIsInZlcmlmaWVkIjpmYWxzZX0.k2kbwbotfTItf1HpYsf1DXArL-g7n175Big1ARpbGADTzr3TBoaCbEkz_04xVIb-1DjUlSpTGRLrj5gmo89N5YMUkvEl68zezk4t0LrjHXMsM27JLIP6DX1Yd_MrD-udMiZs6xElmhD1E0rl2YleBSD3BpuczZdNr5tVA7PeYuTI-BIqFpqOVWkSg6aiEx-lwbUfjQv4l5a8ypVRxszBMoMe5h-fjgSL8QWq0v9zqrl8Xf2JdWtczx46Pwl67QrhyUQxpeJGXNSIXN0Fo6Yl9dIFaBW92NKpRpaHOJqvhEE3Fy57hBINQEdwKlyZbUElHzjVRcmeQHXWHq2F5IpzCQ
+POST https://securetoken.googleapis.com/v1/token?key=[API_KEY]
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=refresh_token&refresh_token={{REFRESH_TOKEN}}}
+
+###
