@@ -1,0 +1,64 @@
+// Firebase Realtime Database stores JSON data in a JSON Tree structure
+
+### Push new JSON data to the path
+POST https://dmit2015-1251-swu-default-rtdb.asia-southeast1.firebasedatabase.app/WeatherForecast.json
+Content-Type: application/json
+
+{
+  "city": "Edmonton",
+  "date": "2025-09-29",
+  "temperatureCelsius": 15
+}
+
+### Push new JSON data to the path
+POST https://dmit2015-1251-swu-default-rtdb.asia-southeast1.firebasedatabase.app/WeatherForecast.json
+Content-Type: application/json
+
+{
+  "city": "Edmonton",
+  "date": "2025-09-30",
+  "temperatureCelsius": 20
+}
+
+
+### Push new JSON data to the path
+POST https://dmit2015-1251-swu-default-rtdb.asia-southeast1.firebasedatabase.app/WeatherForecast.json
+Content-Type: application/json
+
+{
+  "city": "Edmonton",
+  "date": "2025-10-01",
+  "temperatureCelsius": 5
+}
+
+
+### Read JSON data by path
+GET https://dmit2015-1251-swu-default-rtdb.asia-southeast1.firebasedatabase.app/WeatherForecast.json
+
+### Read JSON data by path and primary key value
+@primaryKeyValue = -OaLQ2xsfuIyqM9oN0-5
+GET https://dmit2015-1251-swu-default-rtdb.asia-southeast1.firebasedatabase.app/WeatherForecast/{{primaryKeyValue}}.json
+
+### Write JSON data - will replace all properties with the properties in the request body - if you miss a property it will be removed
+PUT https://dmit2015-1251-swu-default-rtdb.asia-southeast1.firebasedatabase.app/WeatherForecast/{{primaryKeyValue}}.json
+Content-Type: application/json
+
+{
+  "city": "Calgary",
+  "date": "2025-10-01",
+  "temperatureCelsius": -10
+}
+
+
+### Remove JSON data - use this if you want to delete data
+@deletePrimaryKeyValue = -OaLPqdx2um7AeN3Bxo4
+DELETE https://dmit2015-1251-swu-default-rtdb.asia-southeast1.firebasedatabase.app/WeatherForecast/{{deletePrimaryKeyValue}}.json
+
+### Update data - use this if you want to update some of the properties but not all of them
+@patchName = -OaLQExYJuYTo9tSDUQG
+PATCH https://dmit2015-1251-swu-default-rtdb.asia-southeast1.firebasedatabase.app/WeatherForecast/{{patchName}}.json
+Content-Type: application/json
+
+{
+  "city": "Vancouver"
+}

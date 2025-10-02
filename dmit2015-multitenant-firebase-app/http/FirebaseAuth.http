@@ -1,0 +1,28 @@
+
+@API_KEY = AIzaSyAAsaVCqyLsChpgHMWCLSDw8Rsd0AjKkRs
+# curl 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=[API_KEY]'
+#-H 'Content-Type: application/json' 
+#--data-binary '{"email":"[user@example.com]","password":"[PASSWORD]","returnSecureToken":true}'
+POST https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key={{API_KEY}}
+Content-Type: application/json
+
+{
+  "email": "yyfsingler@163.com",
+  "password": "123456",
+  "returnSecureToken": true
+}
+
+###
+# curl 'https://securetoken.googleapis.com/v1/token?key=[API_KEY]'
+#-H 'Content-Type: application/x-www-form-urlencoded'
+#--data 'grant_type=refresh_token&refresh_token=[REFRESH_TOKEN]'
+@REFRESH_TOKEN = AMf-vBzVVUA4ARuGIGWtHYm6JRhDXh1rWvwEpuGyMhlqDHnKPIjVWsXEmuyrYFDxwBRg-JSOyGvQ_3rJBxAkZ6W4hmnFJfWhHo57ePh1tL5Y2YwvbZPYhImz1rMGxKRjNuBFoe1LIx2XGDRvRS2p7jFuYN7tmJlp_GusK9UGoHSjhYJv1tJJGSDTb6WYoDxexsigAdpe2n7v89g67Fdv86yX3oIJT7FMow
+POST https://securetoken.googleapis.com/v1/token?key={{API_KEY}}
+Content-Type: application/x-www-form-urlencoded
+
+grant_type = refresh_token &
+refresh_token = {{REFRESH_TOKEN}}
+
+###
+
+
