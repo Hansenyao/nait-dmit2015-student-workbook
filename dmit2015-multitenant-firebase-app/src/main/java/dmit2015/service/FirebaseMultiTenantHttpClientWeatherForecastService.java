@@ -209,11 +209,9 @@ public class FirebaseMultiTenantHttpClientWeatherForecastService implements Weat
                             .map(item -> {
                                 var currentWeatherForecast = new WeatherForecast();
                                 currentWeatherForecast.setId(item.getKey());
-                                // TODO: Set each property of the Java data object
-                                // currentWeatherForecast.setProperty1(item.getValue().getProperty1());
-                                // currentWeatherForecast.setProperty2(item.getValue().getProperty2());
-                                // currentWeatherForecast.setProperty3(item.getValue().getProperty3());
-
+                                currentWeatherForecast.setCity(item.getValue().getCity());
+                                currentWeatherForecast.setDate(item.getValue().getDate());
+                                currentWeatherForecast.setTemperatureCelsius(item.getValue().getTemperatureCelsius());
                                 return currentWeatherForecast;
                             })
                             .toList();

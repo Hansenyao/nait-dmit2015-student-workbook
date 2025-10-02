@@ -156,11 +156,9 @@ public class FirebaseHttpClientWeatherForecastService implements WeatherForecast
                             .map(item -> {
                                 var currentWeatherForecast = new WeatherForecast();
                                 currentWeatherForecast.setId(item.getKey());
-
                                 currentWeatherForecast.setCity(item.getValue().getCity());
                                 currentWeatherForecast.setDate(item.getValue().getDate());
                                 currentWeatherForecast.setTemperatureCelsius(item.getValue().getTemperatureCelsius());
-
                                 return currentWeatherForecast;
                             })
                             .toList();

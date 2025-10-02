@@ -209,11 +209,9 @@ public class FirebaseMultiTenantHttpClientTaskService implements TaskService {
                             .map(item -> {
                                 var currentTask = new Task();
                                 currentTask.setId(item.getKey());
-                                // TODO: Set each property of the Java data object
-                                // currentTask.setProperty1(item.getValue().getProperty1());
-                                // currentTask.setProperty2(item.getValue().getProperty2());
-                                // currentTask.setProperty3(item.getValue().getProperty3());
-
+                                currentTask.setDescription(item.getValue().getDescription());
+                                currentTask.setPriority(item.getValue().getPriority());
+                                currentTask.setDone(item.getValue().isDone());
                                 return currentTask;
                             })
                             .toList();

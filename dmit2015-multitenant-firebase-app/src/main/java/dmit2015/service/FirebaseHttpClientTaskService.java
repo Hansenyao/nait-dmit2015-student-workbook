@@ -156,7 +156,6 @@ public class FirebaseHttpClientTaskService implements TaskService {
                             .map(item -> {
                                 var currentTask = new Task();
                                 currentTask.setId(item.getKey());
-                                // TODO: Set each property of the Java data object
                                 currentTask.setDescription(item.getValue().getDescription());
                                 currentTask.setPriority(item.getValue().getPriority());
                                 currentTask.setDone(item.getValue().isDone());
