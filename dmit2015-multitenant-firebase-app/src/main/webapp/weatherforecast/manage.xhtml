@@ -21,6 +21,11 @@
 
     <ui:define name="maincontent">
 
+        <!--To redirect to the FirebaseAuth sign in page where a Firebase Authentication token is required-->
+        <f:metadata>
+            <f:viewAction action="#{firebaseAuthSignInSession.checkForToken}" />
+        </f:metadata>
+
         <div class="card">
             <h:form id="form">
                 <p:growl id="growl" showDetail="true">
