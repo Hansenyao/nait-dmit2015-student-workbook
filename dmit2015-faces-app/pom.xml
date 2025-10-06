@@ -20,11 +20,11 @@
     <dependencies>
         <!-- https://balusc.omnifaces.org/2013/10/how-to-install-cdi-in-tomcat.html -->
         <!-- CDI implementation (Weld) for Apache Tomcat 11 -->
-        <dependency>
-            <groupId>org.jboss.weld.servlet</groupId>
-            <artifactId>weld-servlet-shaded</artifactId>
-            <version>6.0.3.Final</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.jboss.weld.servlet</groupId>-->
+<!--            <artifactId>weld-servlet-shaded</artifactId>-->
+<!--            <version>6.0.3.Final</version>-->
+<!--        </dependency>-->
         <!-- Microprofile Config (Smallrye) implementation for Apache Tomcat 11 -->
         <dependency>
             <groupId>io.smallrye.config</groupId>

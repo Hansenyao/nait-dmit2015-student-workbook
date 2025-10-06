@@ -80,25 +80,25 @@
     <!--        </properties>-->
     <!--    </persistence-unit>-->
 
-    <persistence-unit name="h2database-jpa-pu" transaction-type="JTA">
-        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <jta-data-source>java:app/datasources/H2DatabaseDS</jta-data-source>
+<!--    <persistence-unit name="h2database-jpa-pu" transaction-type="JTA">-->
+<!--        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>-->
+<!--        <jta-data-source>java:app/datasources/H2DatabaseDS</jta-data-source>-->
 
         <!-- Data source to use with wildfly-datasources-galleon-pack
             https://github.com/wildfly-extras/wildfly-datasources-galleon-pack -->
         <!--        <jta-data-source>java:jboss/datasources/H2DatabaseDS</jta-data-source>-->
 
-        <properties>
-            <property name="hibernate.show_sql" value="true"/>
+<!--        <properties>-->
+<!--            <property name="hibernate.show_sql" value="true"/>-->
 
             <!--
             The jakarta.persistence.schema-generation.database.action property specifies the action to be taken by the persistence provider with regard to the database artifacts. The values for this property are none, create, drop-and-create, drop, validate
             -->
-            <property name="jakarta.persistence.schema-generation.database.action" value="none"/>
+<!--            <property name="jakarta.persistence.schema-generation.database.action" value="none"/>-->
             <!-- <property name="jakarta.persistence.sql-load-script-source" value="META-INF/sql/import-data.sql" /> -->
 
-        </properties>
-    </persistence-unit>
+<!--        </properties>-->
+<!--    </persistence-unit>-->
 
     <!--    <persistence-unit name="mssql-dmit2015-jpa-pu" transaction-type="JTA">-->
     <!--        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>-->
