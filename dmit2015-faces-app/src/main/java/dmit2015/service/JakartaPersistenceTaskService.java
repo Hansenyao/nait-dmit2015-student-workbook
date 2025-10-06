@@ -1,6 +1,7 @@
 package dmit2015.service;
 
 import dmit2015.model.Task;
+import jakarta.ejb.Stateless;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
@@ -11,6 +12,7 @@ import jakarta.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
+import java.util.UUID;
 import java.util.random.RandomGenerator;
 
 @Named("jakartaPersistenceTaskService")
@@ -18,7 +20,7 @@ import java.util.random.RandomGenerator;
 public class JakartaPersistenceTaskService implements TaskService {
 
     // Assign a unitName if there are more than one persistence unit defined in persistence.xml
-    @PersistenceContext //(unitName="pu-name-in-persistence.xml")
+    @PersistenceContext(unitName="postgresql-jpa-pu") //(unitName="pu-name-in-persistence.xml")
     private EntityManager entityManager;
 
     @Override
@@ -28,6 +30,7 @@ public class JakartaPersistenceTaskService implements TaskService {
         // 1) Generate a new primary key value
         // 2) Set the primary key value for the new entity
 
+        task.setId(UUID.randomUUID().toString());
         entityManager.persist(task);
         return task;
     }
@@ -63,9 +66,9 @@ public class JakartaPersistenceTaskService implements TaskService {
         } else {
             var existingTask = optionalTask.orElseThrow();
             // Update only properties that is editable by the end user
-            // TODO: Copy each edit property from task to existingTask
-            // existingTask.setPropertyName(task.getPropertyName());
-
+            existingTask.setPriority(task.getPriority());
+            existingTask.setDescription(task.getDescription());
+            existingTask.setDone(task.isDone());
             task = entityManager.merge(existingTask);
         }
         return task;

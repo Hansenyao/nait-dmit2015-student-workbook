@@ -11,6 +11,7 @@ import jakarta.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
+import java.util.UUID;
 import java.util.random.RandomGenerator;
 
 @Named("jakartaPersistenceWeatherForecastService")
@@ -28,6 +29,7 @@ public class JakartaPersistenceWeatherForecastService implements WeatherForecast
         // 1) Generate a new primary key value
         // 2) Set the primary key value for the new entity
 
+        weatherForecast.setId(UUID.randomUUID().toString());
         entityManager.persist(weatherForecast);
         return weatherForecast;
     }
@@ -63,8 +65,9 @@ public class JakartaPersistenceWeatherForecastService implements WeatherForecast
         } else {
             var existingWeatherForecast = optionalWeatherForecast.orElseThrow();
             // Update only properties that is editable by the end user
-            // TODO: Copy each edit property from weatherForecast to existingWeatherForecast
-            // existingWeatherForecast.setPropertyName(weatherForecast.getPropertyName());
+            existingWeatherForecast.setCity(weatherForecast.getCity());
+            existingWeatherForecast.setDate(weatherForecast.getDate());
+            existingWeatherForecast.setTemperatureCelsius(weatherForecast.getTemperatureCelsius());
 
             weatherForecast = entityManager.merge(existingWeatherForecast);
         }
