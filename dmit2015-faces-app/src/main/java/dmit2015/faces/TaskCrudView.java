@@ -26,7 +26,8 @@ import java.util.List;
 public class TaskCrudView implements Serializable {
 
     @Inject
-    @Named("memoryTaskService")
+    //@Named("memoryTaskService")
+    @Named("jakartaPersistenceTaskService")
     private TaskService taskService;
 
     /**
