@@ -19,7 +19,7 @@ import java.util.random.RandomGenerator;
 public class JakartaPersistenceWeatherForecastService implements WeatherForecastService {
 
     // Assign a unitName if there are more than one persistence unit defined in persistence.xml
-    @PersistenceContext //(unitName="pu-name-in-persistence.xml")
+    @PersistenceContext(unitName="postgresql-jpa-pu") //(unitName="pu-name-in-persistence.xml")
     private EntityManager entityManager;
 
     @Override
