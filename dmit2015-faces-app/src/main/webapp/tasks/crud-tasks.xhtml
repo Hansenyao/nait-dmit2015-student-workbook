@@ -122,7 +122,9 @@
                             </div>
                             <div class="field">
                                 <p:outputPanel for="@next">Done</p:outputPanel>
-                                <p:selectBooleanCheckbox value="#{currentTaskCrudView.selectedTask.done}" />
+                                <p:selectBooleanCheckbox
+                                        id="done"
+                                        value="#{currentTaskCrudView.selectedTask.done}" />
                             </div>
                         </p:outputPanel>
                     </p:outputPanel>

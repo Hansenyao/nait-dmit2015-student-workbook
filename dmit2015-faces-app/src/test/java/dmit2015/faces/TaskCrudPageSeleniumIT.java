@@ -78,7 +78,8 @@ public class TaskCrudPageSeleniumIT {
 
         var chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--remote-allow-origins=*");
-        chromeOptions.addArguments("--headless=new");              // Chrome 109+ modern headless
+        // Can't open the test page if don't comment below
+        //chromeOptions.addArguments("--headless=new");              // Chrome 109+ modern headless
         chromeOptions.addArguments("--window-size=1366,900");      // important for consistent layout
         driver = new ChromeDriver(chromeOptions);
 
@@ -202,8 +203,8 @@ public class TaskCrudPageSeleniumIT {
     @ParameterizedTest
     @CsvSource(value = {
             "description, First Selenium Test, priority, High, done, true,",
-            //"description, Second Selenium Test, priority, Medium, done, false,",
-            //"description, Third Selenium Test, priority, Low, done, false,",
+            "description, Second Selenium Test, priority, Medium, done, false,",
+            "description, Third Selenium Test, priority, Low, done, false,",
     })
     void shouldCreate(
             String field1Id, String field1Value,
@@ -211,7 +212,7 @@ public class TaskCrudPageSeleniumIT {
             String field3Id, boolean field3Value
     ) throws InterruptedException, IOException {
 
-        driver.get("http://localhost:8080/tasks/crud-tasks.xhtml");
+        driver.get("http://localhost:8080/dmit2015_faces_app_war_exploded/tasks/crud-tasks.xhtml");
         // Maximize the browser window to see the data being inputted
         driver.manage().window().maximize();
         Thread.sleep(1000);
@@ -224,6 +225,9 @@ public class TaskCrudPageSeleniumIT {
         var newButtonElement = driver.findElement(By.id("form:newButton"));
         assertThat(newButtonElement).isNotNull();
         newButtonElement.click();
+
+        WebDriverWait waitdlg = new WebDriverWait(driver, Duration.ofSeconds(5));
+        waitdlg.until(ExpectedConditions.visibilityOfElementLocated(By.id("dialogs:manage-Task-content")));
 
         // Set the value for each form field.
         // Add suffix `_input` for p:inputNumber
