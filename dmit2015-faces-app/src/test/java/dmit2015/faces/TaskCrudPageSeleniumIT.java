@@ -7,8 +7,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -74,21 +72,21 @@ public class TaskCrudPageSeleniumIT {
 //        System.setProperty("webdriver.chrome.driver", "/home/user2015/.cache/selenium/chromedriver/linux64/137.0.7151.70/chromedriver");
 //        System.setProperty("webdriver.gecko.driver", "/snap/bin/geckodriver");
 
-//         WebDriverManager
-//             .chromedriver()
-//             .setup();
-//
-//         var chromeOptions = new ChromeOptions();
-//         chromeOptions.addArguments("--remote-allow-origins=*");
-////         chromeOptions.addArguments("--headless=new");              // Chrome 109+ modern headless
-//         chromeOptions.addArguments("--window-size=1366,900");      // important for consistent layout
-//         driver = new ChromeDriver(chromeOptions);
+        WebDriverManager
+                .chromedriver()
+                .setup();
 
-        WebDriverManager.firefoxdriver().setup();
-        FirefoxOptions ffOptions = new FirefoxOptions();
-//        ffOptions.addArguments("-headless");
-        ffOptions.addArguments("--width=1366", "--height=900");
-        driver = new FirefoxDriver(ffOptions);
+        var chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--remote-allow-origins=*");
+        chromeOptions.addArguments("--headless=new");              // Chrome 109+ modern headless
+        chromeOptions.addArguments("--window-size=1366,900");      // important for consistent layout
+        driver = new ChromeDriver(chromeOptions);
+
+//        WebDriverManager.firefoxdriver().setup();
+//        FirefoxOptions ffOptions = new FirefoxOptions();
+////        ffOptions.addArguments("-headless");
+//        ffOptions.addArguments("--width=1366", "--height=900");
+//        driver = new FirefoxDriver(ffOptions);
 
         js = (JavascriptExecutor) driver;
     }
@@ -202,17 +200,16 @@ public class TaskCrudPageSeleniumIT {
 
     @Order(1)
     @ParameterizedTest
-    // TODO Change the test data below
     @CsvSource(value = {
-            "field1Id, field1Value, field2Id, field2Value, field3Id, field3Value,",
-            "field1Id, field1Value, field2Id, field2Value, field3Id, field3Value,",
-            "field1Id, field1Value, field2Id, field2Value, field3Id, field3Value,",
+            "description, First Selenium Test, priority, High, done, true,",
+            //"description, Second Selenium Test, priority, Medium, done, false,",
+            //"description, Third Selenium Test, priority, Low, done, false,",
     })
     void shouldCreate(
             String field1Id, String field1Value,
             String field2Id, String field2Value,
-            String field3Id, String field3Value
-    ) throws InterruptedException {
+            String field3Id, boolean field3Value
+    ) throws InterruptedException, IOException {
 
         driver.get("http://localhost:8080/tasks/crud-tasks.xhtml");
         // Maximize the browser window to see the data being inputted
@@ -221,6 +218,7 @@ public class TaskCrudPageSeleniumIT {
 
         assertThat(driver.getTitle())
                 .isEqualToIgnoringCase("Task - CRUD");
+        driver.manage().window().maximize();
 
         // Find the New button by id then click on it
         var newButtonElement = driver.findElement(By.id("form:newButton"));
@@ -233,7 +231,11 @@ public class TaskCrudPageSeleniumIT {
         // setPrimeFacesSelectOneMenuValue(field2Id, field2Value);
         // setPrimeFacesDatePickerValue(field1Id, field1Value);
         setTextValue("dialogs:" + field2Id, field2Value);
-        setTextValue("dialogs:" + field3Id, field3Value);
+        //setTextValue("dialogs:" + field3Id, field3Value);
+        if (field3Value) {
+            var doneElement = driver.findElement(By.id("dialogs:" + field3Id));
+            doneElement.click();
+        }
 
         Thread.sleep(1000);
 
@@ -264,11 +266,10 @@ public class TaskCrudPageSeleniumIT {
 
     @Order(2)
     @ParameterizedTest
-    // TODO Change the test data below
     @CsvSource({
-            "0, Column1Value, Column2Value, Column3Value",
-            "1, Column1Value, Column2Value, Column3Value",
-            "2, Column1Value, Column2Value, Column3Value",
+            "0, First Selenium Test, High, true",
+            "1, Second Selenium Test, Medium, false",
+            "2, Third Selenium Test, Low, false",
     })
     void shouldList(
             int idIndex,
@@ -276,7 +277,7 @@ public class TaskCrudPageSeleniumIT {
     ) throws InterruptedException {
         String expectedIdValue = sharedEditIds.get(idIndex);
         // Open a browser and navigate to the index page
-        driver.get("http://localhost:8080/tasks/crud-tasks.xhmtl");
+        driver.get("http://localhost:8080/tasks/crud-tasks.xhtml");
         // Maximize the browser window so we can see the data being inputted
         driver.manage().window().maximize();
         Thread.sleep(1000);
@@ -300,15 +301,15 @@ public class TaskCrudPageSeleniumIT {
                 .isEqualToIgnoringCase(expectedColumn3Value);
 
         // Take screenshot of page and save source code
-        // snapshot(driver, "found-row" + expectedIdValue);        
+        // snapshot(driver, "found-row" + expectedIdValue);
 
     }
 
     @Order(3)
     @Test
-    void shouldDelete() throws InterruptedException {
+    void shouldDelete() throws InterruptedException, IOException {
         // Open a browser and navigate to the target page
-        driver.get("http://localhost:8080/tasks/crud-tasks.xhmtl");
+        driver.get("http://localhost:8080/tasks/crud-tasks.xhtml");
         // Maximize the browser window so we can see the data being inputted
         driver.manage().window().maximize();
         Thread.sleep(1000);
@@ -346,7 +347,7 @@ public class TaskCrudPageSeleniumIT {
                     .containsIgnoringCase("Delete was successful");
 
             // Take screenshot of page and save source code
-            // snapshot(driver, "after-delete" + idValue);        
+//             snapshot(driver, "after-delete" + idValue);
 
         }
 
