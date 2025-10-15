@@ -8,10 +8,7 @@ import net.datafaker.Faker;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.random.RandomGenerator;
@@ -33,12 +30,17 @@ public class Student implements Serializable {
     private static final Logger logger = Logger.getLogger(Student.class.getName());
 
     @Id
-    // @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "studentid", nullable = false)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "studid", nullable = false)
     private String id;
 
-    // TODO: Add a field for each column in the database table
-
+    @NotBlank
+    private String name;
+    @NotBlank
+    private String courseTermSection;
+//    @Column(columnDefinition = "bytea")
+    @Lob
+    private byte[] picture;
 
     public Student() {
 
@@ -77,46 +79,11 @@ public class Student implements Serializable {
 
     // Factory method to create a new Student instance
     public static Student of(Faker faker) {
-        Student currentStudent = new Student();
-        // TODO: uncomment below set each property with fake data
-        // currentStudent.setProperty1(faker.provider().method());
-        // currentStudent.setProperty2(faker.provider().method());
-        // currentStudent.setProperty3(faker.provider().method());
-        return currentStudent;
-    }
-
-    public static Optional<Student> parseCsv(String line) {
-        final var DELIMITER = ",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)";
-        String[] tokens = line.split(DELIMITER, -1);  // The -1 limit allows for any number of fields and not discard trailing empty fields
-        /*
-         * The order of the columns are:
-         * 0 - column1
-         * 1 - column2
-         * 2 - column3
-         * 3 - column4
-         */
-        if (tokens.length == 5) {
-            Student parsedStudent = new Student();
-
-            try {
-                // String stringColumnValue = tokens[0].replaceAll("\"","");
-                // boolean booleanColumnValue = Boolean.parse(tokens[0]);
-                // LocalDate dateColumnValue = tokens[0].isBlank() ? null : LocalDate.parse(tokens[0]);
-                // BigDecimal decimalColumnValue = tokens[0].isBlank() ? null : BigDecimal.valueOf(Double.parseDouble(tokens[0]));
-                // Integer IntegerColumnValue = tokens[0].isBlank() ? null : Integer.valueOf(tokens[0]);
-                // Double DoubleColumnValue = tokens[0].isBlank() ? null : Double.valueOf(tokens[0]);
-                // int intColumnValue = tokens[0].isBlank() ? 0 : Integer.parseInt(tokens[0]);
-                // double doubleColumnValue = tokens[0].isBlank() ? 0 : Double.parseDouble(tokens[0]);
-
-                // parsedStudent.setProperty1(column1Value);
-
-                return Optional.of(parsedStudent);
-            } catch (Exception ex) {
-                logger.log(Level.WARNING, ex.getMessage(), ex);
-            }
-        }
-
-        return Optional.empty();
+        var newStudent = new Student();
+        newStudent.setId(UUID.randomUUID().toString());
+        newStudent.setName(faker.name().fullName());
+        newStudent.setCourseTermSection("DMIT2015-1251-A01");
+        return newStudent;
     }
 
 }

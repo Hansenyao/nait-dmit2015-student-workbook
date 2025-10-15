@@ -89,13 +89,18 @@ public class JakartaPersistenceDataGenerator {
 
     public static void generateData(EntityManager em) {
         var faker = new Faker();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 20; i++) {
             Task currentTask = Task.of(faker);
             em.persist(currentTask);
-            WeatherForecast weatherForecast = WeatherForecast.of(faker);
-            em.persist(weatherForecast);
-            Student student = Student.of(faker);
-            em.persist(student);
         }
+        for (int i = 0; i < 7; i++) {
+            WeatherForecast currentForecast = WeatherForecast.of(faker);
+            em.persist(currentForecast);
+        }
+        for (int i = 0; i < 32; i++) {
+            Student currentStudent = Student.of(faker);
+            em.persist(currentStudent);
+        }
+
     }
 }

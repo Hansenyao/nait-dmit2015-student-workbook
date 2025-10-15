@@ -30,20 +30,16 @@ public class Task implements Serializable {
     private static final Logger logger = Logger.getLogger(Task.class.getName());
 
     @Id
-    // @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "taskid", nullable = false)
     private String id;
-
-    // TODO: Add a field for each column in the database table
 
     @NotBlank(message = "Description is required.")
     @Column(length = 1024)
     private String description;
 
-    @NotBlank(message = "Priority is required.")
     private String priority;    // Low, Medium, High
     private boolean done;
-
 
     public Task() {
 
@@ -84,10 +80,11 @@ public class Task implements Serializable {
     public static Task of(Faker faker) {
         var currentTask = new Task();
         var randomGenerator = RandomGenerator.getDefault();
-        String[] priorities = {"Low", "Medium", "High"};
+        String[] priorities = {"Low","Medium","High"};
         currentTask.setId(UUID.randomUUID().toString());
-        currentTask.setDescription(faker.babylon5().quote());
+        currentTask.setDescription(faker.breakingBad().episode());
         currentTask.setPriority(priorities[randomGenerator.nextInt(priorities.length)]);
         return currentTask;
     }
+
 }

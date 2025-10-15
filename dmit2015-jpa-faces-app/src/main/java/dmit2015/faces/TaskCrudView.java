@@ -13,8 +13,6 @@ import org.omnifaces.util.Messages;
 import org.primefaces.PrimeFaces;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -26,7 +24,6 @@ import java.util.List;
 public class TaskCrudView implements Serializable {
 
     @Inject
-    //@Named("memoryTaskService")
     @Named("jakartaPersistenceTaskService")
     private TaskService taskService;
 
@@ -89,9 +86,11 @@ public class TaskCrudView implements Serializable {
         try {
             var faker = new Faker();
             selectedTask = Task.of(faker);
+            selectedTask.setId(selectedId);
         } catch (Exception e) {
             Messages.addGlobalError("Error generating data {0}", e.getMessage());
         }
+
     }
 
     /**

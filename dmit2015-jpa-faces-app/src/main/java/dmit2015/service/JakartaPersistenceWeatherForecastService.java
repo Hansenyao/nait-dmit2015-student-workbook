@@ -6,20 +6,17 @@ import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
 
 import java.util.List;
 import java.util.Optional;
-
 import java.util.UUID;
-import java.util.random.RandomGenerator;
 
 @Named("jakartaPersistenceWeatherForecastService")
 @ApplicationScoped
 public class JakartaPersistenceWeatherForecastService implements WeatherForecastService {
 
     // Assign a unitName if there are more than one persistence unit defined in persistence.xml
-    @PersistenceContext(unitName="postgresql-jpa-pu") //(unitName="pu-name-in-persistence.xml")
+    @PersistenceContext (unitName="postgresql-jpa-pu")
     private EntityManager entityManager;
 
     @Override
@@ -28,7 +25,6 @@ public class JakartaPersistenceWeatherForecastService implements WeatherForecast
         // If the primary key is not an identity column then write code below here to
         // 1) Generate a new primary key value
         // 2) Set the primary key value for the new entity
-
         weatherForecast.setId(UUID.randomUUID().toString());
         entityManager.persist(weatherForecast);
         return weatherForecast;
@@ -65,9 +61,10 @@ public class JakartaPersistenceWeatherForecastService implements WeatherForecast
         } else {
             var existingWeatherForecast = optionalWeatherForecast.orElseThrow();
             // Update only properties that is editable by the end user
-            existingWeatherForecast.setCity(weatherForecast.getCity());
-            existingWeatherForecast.setDate(weatherForecast.getDate());
-            existingWeatherForecast.setTemperatureCelsius(weatherForecast.getTemperatureCelsius());
+
+             existingWeatherForecast.setCity(weatherForecast.getCity());
+             existingWeatherForecast.setDate(weatherForecast.getDate());
+             existingWeatherForecast.setTemperatureCelsius(weatherForecast.getTemperatureCelsius());
 
             weatherForecast = entityManager.merge(existingWeatherForecast);
         }

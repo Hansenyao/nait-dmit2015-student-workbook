@@ -13,10 +13,7 @@ import org.omnifaces.util.Messages;
 import org.primefaces.PrimeFaces;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * This Jakarta Faces backing bean class contains the data and event handlers
@@ -27,8 +24,8 @@ import java.util.UUID;
 public class WeatherForecastCrudView implements Serializable {
 
     @Inject
-    //@Named("memoryWeatherForecastService") // For In-Memory db service
-    //@Named("firebaseHttpClientWeatherForecastService")  // For Firebase db service
+//    @Named("memoryWeatherForecastService")
+//    @Named("firebaseHttpClientWeatherForecastService")
     @Named("jakartaPersistenceWeatherForecastService")
     private WeatherForecastService weatherForecastService;
 
@@ -90,11 +87,8 @@ public class WeatherForecastCrudView implements Serializable {
     public void onGenerateData() {
         try {
             var faker = new Faker();
-            selectedWeatherForecast.setId(UUID.randomUUID().toString());
-            selectedWeatherForecast.setDate(LocalDate.now().plusDays(faker.number().numberBetween(1,7)));
-            selectedWeatherForecast.setCity(faker.address().city());
-            selectedWeatherForecast.setTemperatureCelsius(faker.number().numberBetween(-35,35));
-
+            selectedWeatherForecast = WeatherForecast.of(faker);
+            selectedWeatherForecast.setId(selectedId);
         } catch (Exception e) {
             Messages.addGlobalError("Error generating data {0}", e.getMessage());
         }
