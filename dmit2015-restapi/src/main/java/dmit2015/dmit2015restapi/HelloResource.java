@@ -11,4 +11,16 @@ public class HelloResource {
     public String hello() {
         return "Hello, World!";
     }
+
+    @GET
+    @Produces("text/html")
+    public String helloHtml() {
+        return "<h3> Hello, World in HTML!</h3>";
+    }
+
+    @GET
+    @Produces("application/json")
+    public String helloHJson() {
+        return "{greeting: 'Hello, World!'}";
+    }
 }
