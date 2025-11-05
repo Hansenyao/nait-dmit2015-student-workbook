@@ -1,4 +1,4 @@
-package dmit2015.common.validation;
+package common.validation;
 
 import jakarta.json.Json;
 import jakarta.json.JsonObjectBuilder;
