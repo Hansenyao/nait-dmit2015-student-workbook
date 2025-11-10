@@ -15,12 +15,12 @@ public class HelloResource {
     @GET
     @Produces("text/html")
     public String helloHtml() {
-        return "<h3> Hello, World in HTML!</h3>";
+        return "<h3>Hello, World in HTML</h3>";
     }
 
     @GET
     @Produces("application/json")
-    public String helloHJson() {
-        return "{greeting: 'Hello, World!'}";
+    public String helloJson() {
+        return "{greeting: \"Hello from JSON World\"}";
     }
 }

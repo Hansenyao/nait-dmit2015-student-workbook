@@ -1,64 +1,43 @@
-###Create a new entity
-POST http://localhost:8090
-Content-Type:application/
+### Get all TodoItems
+GET http://localhost:8090/restapi/TodoItems
 
-json {
-    "propertyName1":"property1Value",
-            "propertyName2":"property2Value",
-            "propertyName2":"property2Value"
+### Get a single TodoItem with an id of 1
+GET http://localhost:8090/restapi/TodoItems/1
+
+### POST a new TodoItem with valid data
+POST http://localhost:8090/restapi/TodoItems
+Content-Type: application/json
+
+{
+  "task": "Start DMIT2015 Assignment 6",
+  "done": false
 }
 
-###
-GET All
-entity from
-REST API
-endpoint
-GET http://localhost:8090
+### Post a new TodoItem with invalid data
+POST http://localhost:8090/restapi/TodoItems
+Content-Type: application/json
 
-        ###
-GET One
-entity from
-REST API
-endpoint
-GET http://localhost:8090/primaryKeyValue
-
-        ###
-UPDATE entity
-at the
-REST API
-endpoint -
-will replace
-all properties
-with the
-properties in
-the request
-body
-PUT http://localhost:8090/primaryKeyValue
-Content-Type:application/
-
-json {
-    "propertyName1":"property1Value",
-            "propertyName2":"property2Value",
-            "propertyName3":"property3Value"
+{
+  "task": "     ",
+  "done": false
 }
 
-###
-DELETE entity
-at the
-REST API
-endpoint
-DELETE http://localhost:8090/primaryKeyValue
+### Get a single TodoItem with an id of 4
+GET http://localhost:8090/restapi/TodoItems/4
 
-        ###
-Update specific
-properties of
-the entity
-at the
-REST API
-endpoint
-PATCH http://localhost:8090/primaryKeyValue
-Content-Type:application/
+### Update TodoItem with an id of 4 with valid data
+PUT http://localhost:8090/restapi/TodoItems/4
+Content-Type: application/json
 
-json {
-    "propertyName":"propertyValue"
+{
+  "id": 4,
+  "task": "Commit DMIT2015 Assignment 6",
+  "done": true,
+  "version": 0
 }
+
+### Delete an TodoItem with an id of 2
+DELETE http://localhost:8090/restapi/TodoItems/2
+
+### Delete an TodoItem with an id of 4
+DELETE http://localhost:8090/restapi/TodoItems/4

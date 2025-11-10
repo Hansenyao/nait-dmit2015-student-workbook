@@ -12,10 +12,10 @@ import java.util.logging.Logger;
 
 @ApplicationScoped
 public class TodoItemInitializer {
-    private final Logger _logger = Logger.getLogger(TodoItemInitializer.class.getName());
+    private final Logger logger = Logger.getLogger(TodoItemInitializer.class.getName());
 
     @Inject
-    private TodoItemRepository _todoItemRepository;
+    private TodoItemRepository todoItemRepository;
 
     /**
      * Using the combination of `@Observes` and `@Initialized` annotations, you can
@@ -32,33 +32,33 @@ public class TodoItemInitializer {
      * ]    * @param event
      */
     public void initialize(@Observes @Initialized(ApplicationScoped.class) Object event) {
-        _logger.info("@PostConstruct init method");
+        logger.info("@PostConstruct init method");
 
-        if (_todoItemRepository.count() == 0) {
+        if (todoItemRepository.count() == 0) {
             try {
                 TodoItem todo1 = new TodoItem();
                 todo1.setTask("Create JAX-RS demo project");
                 todo1.setDone(true);
                 todo1.setCreateTime(LocalDateTime.now());
-                _todoItemRepository.add(todo1);
+                todoItemRepository.add(todo1);
 
                 TodoItem todo2 = new TodoItem();
                 todo2.setTask("Run and verify all Integration Test pass");
                 todo2.setDone(false);
                 todo2.setCreateTime(LocalDateTime.now());
-                _todoItemRepository.add(todo2);
+                todoItemRepository.add(todo2);
 
                 TodoItem todo3 = new TodoItem();
                 todo3.setTask("Create DTO version of TodoResource");
                 todo3.setDone(false);
                 todo3.setCreateTime(LocalDateTime.now());
-                _todoItemRepository.add(todo3);
+                todoItemRepository.add(todo3);
 
             } catch (Exception ex) {
-                _logger.log(Level.SEVERE, "TodoItemInitializer intialized method failed to complete.", ex);
+                logger.log(Level.SEVERE, "TodoItemInitializer intialized method failed to complete.", ex);
             }
 
-            _logger.info("Created " + _todoItemRepository.count() + " records.");
+            logger.info("Created " + todoItemRepository.count() + " records.");
         }
     }
 }

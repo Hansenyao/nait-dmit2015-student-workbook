@@ -41,7 +41,7 @@ public class TodoItemRepositoryIT {
                 .addAsLibraries(pomFile.resolve("org.hamcrest:hamcrest:3.0").withTransitivity().asFile())
                 .addClass(ApplicationConfig.class)
                 .addClasses(TodoItem.class, TodoItemRepository.class, TodoItemInitializer.class)
-                .addAsResource("META-INF/persistence.xml")
+               .addAsResource("META-INF/persistence.xml")
                 // .addAsResource(new File("src/test/resources/META-INF/persistence-todoitem.xml"),"META-INF/persistence.xml")
                 .addAsResource("META-INF/beans.xml");
     }

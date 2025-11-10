@@ -97,4 +97,5 @@ public class TodoItemRepository {
         _entityManager.clear();
         _entityManager.createQuery("DELETE FROM TodoItem").executeUpdate();
     }
+
 }
