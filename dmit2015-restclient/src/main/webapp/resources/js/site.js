@@ -1,4 +1,4 @@
-const uri = 'http://localhost:8090/restapi/TodoItemsDto';
+const uri = 'http://localhost:8090/restapi/TodoItemDtos';
 let todos = [];
 
 function getItems() {
