@@ -14,7 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.target>21</maven.compiler.target>
         <maven.compiler.source>21</maven.compiler.source>
-        <junit.version>5.13.2</junit.version>
+        <junit.version>6.0.1</junit.version>
     </properties>
 
     <dependencies>
@@ -42,6 +42,41 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>jakarta.mail</groupId>
+            <artifactId>jakarta.mail-api</artifactId>
+            <version>2.1.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.microprofile.config</groupId>
+            <artifactId>microprofile-config-api</artifactId>
+            <version>3.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.42</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>6.6.38.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-spatial</artifactId>
+            <version>6.6.38.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.microsoft.sqlserver</groupId>
+            <artifactId>mssql-jdbc</artifactId>
+            <version>13.2.1.jre11</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -50,6 +85,44 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.4.0</version>
+            </plugin>
+            <plugin>
+                <groupId>org.wildfly.plugins</groupId>
+                <artifactId>wildfly-maven-plugin</artifactId>
+                <version>5.1.5.Final</version>
+                <configuration>
+                    <discover-provisioning-info>
+                        <version>38.0.1.Final</version>
+                        <excludedArchives>
+                            <archive>hibernate-core-6.6.38.Final.jar</archive>
+                        </excludedArchives>
+                        <suggest>true</suggest>
+                        <verbose>true</verbose>
+                    </discover-provisioning-info>
+
+                    <!--        <feature-packs>-->
+                    <!--            <feature-pack>-->
+                    <!--                <location>wildfly@maven(org.jboss.universe:community-universe)#38.0.1.Final</location>-->
+                    <!--            </feature-pack>-->
+                    <!--        </feature-packs>-->
+
+                    <bootableJar>true</bootableJar>
+
+                    <!-- deploys the app on root web context -->
+                    <name>ROOT.war</name>
+
+                    <!-- Enable debugging -->
+                    <!-- https://www.jetbrains.com/help/idea/attaching-to-local-process.html#attach-to-local -->
+                    <!-- To attach a debugger to the running server from IntelliJ IDEA
+                        1. From the main menu, choose `Run | Attach to Process`
+                        2. IntelliJ IDEA will show the list of running local processes.
+                            Select the process with the `jboss-module.jar (8787)` name to attach to.
+                    -->
+                    <debug>true</debug>
+                    <debugPort>8787</debugPort>
+                    <debugSuspend>false</debugSuspend>
+
+                </configuration>
             </plugin>
         </plugins>
     </build>
