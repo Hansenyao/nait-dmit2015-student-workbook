@@ -5,10 +5,13 @@
 
     <listeners>
         <!-- Use a JobListener to delete all existing records and let the batchlet re-create all records.  -->
-        <!--        <listener ref="pubsETLTaskJobListener"/>-->
+        <listener ref="eltProcessForDwPubsSalesJobListener"/>
     </listeners>
 
     <step id="dropFKs" next="truncateTables">
+        <listeners>
+            <listener ref="etlProcessForDwPubsSalesStepListener" />
+        </listeners>
         <batchlet ref="executeMultiLineSQLStatementBatchlet">
             <properties>
                 <property name="sql_script_file" value="/data/sql/pubs-etl-drop-foreign-keys.sql"/>
@@ -17,6 +20,9 @@
     </step>
 
     <step id="truncateTables" next="fillDimAuthors">
+        <listeners>
+            <listener ref="etlProcessForDwPubsSalesStepListener" />
+        </listeners>
         <batchlet ref="executeMultiLineSQLStatementBatchlet">
             <properties>
                 <property name="sql_script_file" value="/data/sql/pubs-etl-truncate-tables.sql"/>
@@ -25,6 +31,9 @@
     </step>
 
     <step id="fillDimAuthors" next="fillDimStores">
+        <listeners>
+            <listener ref="etlProcessForDwPubsSalesStepListener" />
+        </listeners>
         <batchlet ref="executeMultiLineSQLStatementBatchlet">
             <properties>
                 <property name="sql_script_file" value="/data/sql/pubs-etl-fill-DimAuthors.sql"/>
@@ -33,6 +42,9 @@
     </step>
 
     <step id="fillDimStores" next="fillDimPublishers">
+        <listeners>
+            <listener ref="etlProcessForDwPubsSalesStepListener" />
+        </listeners>
         <batchlet ref="executeMultiLineSQLStatementBatchlet">
             <properties>
                 <property name="sql_script_file" value="/data/sql/pubs-etl-fill-DimStores.sql"/>
@@ -41,6 +53,9 @@
     </step>
 
     <step id="fillDimPublishers" next="fillDimDates">
+        <listeners>
+            <listener ref="etlProcessForDwPubsSalesStepListener" />
+        </listeners>
         <batchlet ref="executeMultiLineSQLStatementBatchlet">
             <properties>
                 <property name="sql_script_file" value="/data/sql/pubs-etl-fill-DimPublishers.sql"/>
@@ -49,6 +64,9 @@
     </step>
 
     <step id="fillDimDates" next="addNullDateLookupValues">
+        <listeners>
+            <listener ref="etlProcessForDwPubsSalesStepListener" />
+        </listeners>
         <batchlet ref="executeMultiLineSQLStatementBatchlet">
             <properties>
                 <property name="sql_script_file" value="/data/sql/pubs-etl-fill-DimDates.sql"/>
@@ -57,6 +75,9 @@
     </step>
 
     <step id="addNullDateLookupValues" next="fillDimTitles">
+        <listeners>
+            <listener ref="etlProcessForDwPubsSalesStepListener" />
+        </listeners>
         <batchlet ref="executeMultiLineSQLStatementBatchlet">
             <properties>
                 <property name="sql_script_file" value="/data/sql/pubs-etl-add-null-date-lookup-values.sql"/>
@@ -65,6 +86,9 @@
     </step>
 
     <step id="fillDimTitles" next="fillFactTitleAuthors">
+        <listeners>
+            <listener ref="etlProcessForDwPubsSalesStepListener" />
+        </listeners>
         <batchlet ref="executeMultiLineSQLStatementBatchlet">
             <properties>
                 <property name="sql_script_file" value="/data/sql/pubs-etl-fill-DimTitles.sql"/>
@@ -73,6 +97,9 @@
     </step>
 
     <step id="fillFactTitleAuthors" next="fillFactSales">
+        <listeners>
+            <listener ref="etlProcessForDwPubsSalesStepListener" />
+        </listeners>
         <batchlet ref="executeMultiLineSQLStatementBatchlet">
             <properties>
                 <property name="sql_script_file" value="/data/sql/pubs-etl-fill-FactTitleAuthors.sql"/>
@@ -81,6 +108,9 @@
     </step>
 
     <step id="fillFactSales" next="addFKs">
+        <listeners>
+            <listener ref="etlProcessForDwPubsSalesStepListener" />
+        </listeners>
         <batchlet ref="executeMultiLineSQLStatementBatchlet">
             <properties>
                 <property name="sql_script_file" value="/data/sql/pubs-etl-fill-FactSales.sql"/>
@@ -89,6 +119,9 @@
     </step>
 
     <step id="addFKs">
+        <listeners>
+            <listener ref="etlProcessForDwPubsSalesStepListener" />
+        </listeners>
         <batchlet ref="executeMultiLineSQLStatementBatchlet">
             <properties>
                 <property name="sql_script_file" value="/data/sql/pubs-etl-add-foreign-keys.sql"/>
